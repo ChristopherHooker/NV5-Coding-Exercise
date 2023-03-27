@@ -6,17 +6,15 @@ using System.Threading.Tasks;
 
 namespace NV5_Coding_Exercise.Entities
 {
-    internal class Building
+    /// <summary>
+    /// Object to represent Building Data.
+    /// </summary>
+    public class Building : Location
     {
-        int Rank { get; set; }
-        string? Name { get; set; }
-        double Coordinate_X { get; set; }
-        double Coordinate_Y { get; set; }
-        double Elevation { get; set; }
-        int Height { get; set; }
-        int Floors { get; set; }
-        int Year { get; set; }
-        string? Notes { get; set; }
-
+        public double Rank { get; set; }
+        public double Height { get; set; }
+        public double Floors { get; set; }
+        public double Year { get; set; }
+        public string? Notes { get; set; }
     }
 }

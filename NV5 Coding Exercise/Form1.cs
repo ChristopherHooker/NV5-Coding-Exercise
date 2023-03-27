@@ -14,28 +14,47 @@ namespace NV5_Coding_Exercise
         private void LoadQueriesButton_Click(object sender, EventArgs e)
         {
             DataTable dt = new DataTable();
+            dataGridView1.DataSource = dt; //Make sure the gridview reloads the columns in the correct order
 
             try
             {
+                //Read buildings and queries from excel sheets
                 List<Building> buildings = ExcelSheetToBuildings(BuildingsTextBox.Text);
                 List<Location> queryLocations = ExcelSheetToLocations(QueriesTextBox.Text);
-                Console.WriteLine(buildings.ToString());
+
+                //Build Columns in data table
                 dt.Columns.Add("Name");
                 dt.Columns.Add("X");
                 dt.Columns.Add("Y");
-                dt.Columns.Add("Elevation");
+                if(calculate3dCheckbox.Checked) dt.Columns.Add("Elevation"); //Only display elevation if checking in 3D
                 dt.Columns.Add("Nearest Building");
                 dt.Columns.Add("Distance");
+                if (additionalInfoCheckBox.Checked) {
+                    dt.Columns.Add("Floors");
+                    dt.Columns.Add("Height");
+                    dt.Columns.Add("Year");
+                    dt.Columns.Add("Rank");
+                    dt.Columns.Add("Notes");
+                }
+
                 foreach(Location location in queryLocations)
                 {
                     DataRow dr = dt.NewRow();
                     dr["Name"] = location.Name;
                     dr["X"] = location.Coordinate_X;
                     dr["Y"] = location.Coordinate_Y;
-                    dr["Elevation"] = location.Elevation;
+                    if (calculate3dCheckbox.Checked) dr["Elevation"] = location.Elevation; //only display elevation if checking in 3D
                     Building nearestBuilding = GetNearestBuilding(buildings, location);
                     dr["Nearest Building"] = nearestBuilding.Name;
-                    dr["Distance"] = location.calculateDistance(nearestBuilding);
+                    dr["Distance"] = location.calculateDistance(nearestBuilding, calculate3dCheckbox.Checked);
+                    if(additionalInfoCheckBox.Checked)
+                    {
+                        dr["Floors"] = nearestBuilding.Floors;
+                        dr["Height"] = nearestBuilding.Height;
+                        dr["Year"] = nearestBuilding.Year;
+                        dr["Rank"] = nearestBuilding.Rank;
+                        dr["Notes"] = nearestBuilding.Notes;
+                    }
                     dt.Rows.Add(dr);
                 }
 
@@ -210,7 +229,7 @@ namespace NV5_Coding_Exercise
             double? MinDistance = null;
             foreach(Building building in buildingList)
             {
-                double distance = building.calculateDistance(query);
+                double distance = building.calculateDistance(query, calculate3dCheckbox.Checked);
                 if (MinDistance == null ||distance < MinDistance)
                 {
                     result = building;
@@ -219,6 +238,11 @@ namespace NV5_Coding_Exercise
             }
 
             return result;
+        }
+
+        private void checkBox1_CheckedChanged(object sender, EventArgs e)
+        {
+
         }
     }
 }

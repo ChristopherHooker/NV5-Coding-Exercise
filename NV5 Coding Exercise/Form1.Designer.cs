@@ -37,7 +37,8 @@
             this.BuildingsSelectButton = new System.Windows.Forms.Button();
             this.BuildingsTextBox = new System.Windows.Forms.TextBox();
             this.label2 = new System.Windows.Forms.Label();
-            this.debugBox = new System.Windows.Forms.TextBox();
+            this.calculate3dCheckbox = new System.Windows.Forms.CheckBox();
+            this.additionalInfoCheckBox = new System.Windows.Forms.CheckBox();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -123,19 +124,34 @@
             this.label2.Text = "Buildings File Name";
             this.label2.Click += new System.EventHandler(this.label2_Click);
             // 
-            // debugBox
+            // calculate3dCheckbox
             // 
-            this.debugBox.Location = new System.Drawing.Point(536, 97);
-            this.debugBox.Name = "debugBox";
-            this.debugBox.Size = new System.Drawing.Size(252, 23);
-            this.debugBox.TabIndex = 8;
+            this.calculate3dCheckbox.AutoSize = true;
+            this.calculate3dCheckbox.Location = new System.Drawing.Point(129, 99);
+            this.calculate3dCheckbox.Name = "calculate3dCheckbox";
+            this.calculate3dCheckbox.Size = new System.Drawing.Size(105, 19);
+            this.calculate3dCheckbox.TabIndex = 8;
+            this.calculate3dCheckbox.Text = "Calculate In 3D";
+            this.calculate3dCheckbox.UseVisualStyleBackColor = true;
+            // 
+            // additionalInfoCheckBox
+            // 
+            this.additionalInfoCheckBox.AutoSize = true;
+            this.additionalInfoCheckBox.Location = new System.Drawing.Point(240, 99);
+            this.additionalInfoCheckBox.Name = "additionalInfoCheckBox";
+            this.additionalInfoCheckBox.Size = new System.Drawing.Size(168, 19);
+            this.additionalInfoCheckBox.TabIndex = 9;
+            this.additionalInfoCheckBox.Text = "Show Building Information";
+            this.additionalInfoCheckBox.UseVisualStyleBackColor = true;
+            this.additionalInfoCheckBox.CheckedChanged += new System.EventHandler(this.checkBox1_CheckedChanged);
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
-            this.Controls.Add(this.debugBox);
+            this.Controls.Add(this.additionalInfoCheckBox);
+            this.Controls.Add(this.calculate3dCheckbox);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.BuildingsTextBox);
             this.Controls.Add(this.BuildingsSelectButton);
@@ -164,6 +180,7 @@
         private Button BuildingsSelectButton;
         private TextBox BuildingsTextBox;
         private Label label2;
-        private TextBox debugBox;
+        private CheckBox calculate3dCheckbox;
+        private CheckBox additionalInfoCheckBox;
     }
 }

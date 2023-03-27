@@ -18,12 +18,22 @@ namespace NV5_Coding_Exercise.Entities
         /// </summary>
         /// <param name="target"></param>
         /// <returns></returns>
-        public double calculateDistance(Location target)
+        public double calculateDistance(Location target, bool calcInThreeD = false)
         {
-            double xDistance = Math.Abs(target.Coordinate_X - Coordinate_X);
-            double yDistance = Math.Abs(target.Coordinate_Y - Coordinate_Y);
+            double distance = 0;
+            if (calcInThreeD)
+            {
+                distance = Math.Sqrt(Math.Pow(target.Coordinate_X - Coordinate_X, 2) + Math.Pow(target.Elevation - Elevation, 2) + Math.Pow(target.Coordinate_Y - Coordinate_Y, 2));
+            } else
+            {
+                double xDistance = Math.Abs(target.Coordinate_X - Coordinate_X);
+                double yDistance = Math.Abs(target.Coordinate_Y - Coordinate_Y);
 
-            return Math.Sqrt(xDistance * xDistance + yDistance * yDistance);
+                distance = Math.Sqrt(xDistance * xDistance + yDistance * yDistance);
+            }
+
+            return distance;
+
         }
     }
 }
